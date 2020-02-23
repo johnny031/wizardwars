@@ -395,38 +395,38 @@ class Scene2 extends Phaser.Scene {
       if (selected_bullet === 1) {
         var loadBar = loadBar1_1;
         var t = t1_1;
-        var coolDownTime = 360 / (4 * 15);
+        var coolDownTime = 360 / (4 * 60);
       } else if (selected_bullet === 2) {
         var loadBar = loadBar2_1;
         var t = t2_1;
-        var coolDownTime = 360 / (4 * 15);
+        var coolDownTime = 360 / (4 * 60);
       } else if (selected_bullet === 3) {
         var loadBar = loadBar3_1;
         var t = t3_1;
-        var coolDownTime = 360 / (7 * 15);
+        var coolDownTime = 360 / (7 * 60);
       } else if (selected_bullet === 4) {
         var loadBar = loadBar4_1;
         var t = t4_1;
-        var coolDownTime = 360 / (10 * 15);
+        var coolDownTime = 360 / (10 * 60);
       }
     } else {
       var start_point = Math.PI / 2;
       if (selected_bullet === 1) {
         var loadBar = loadBar1_2;
         var t = t1_2;
-        var coolDownTime = 360 / (4 * 15);
+        var coolDownTime = 360 / (4 * 60);
       } else if (selected_bullet === 2) {
         var loadBar = loadBar2_2;
         var t = t2_2;
-        var coolDownTime = 360 / (4 * 15);
+        var coolDownTime = 360 / (4 * 60);
       } else if (selected_bullet === 3) {
         var loadBar = loadBar3_2;
         var t = t3_2;
-        var coolDownTime = 360 / (7 * 15);
+        var coolDownTime = 360 / (7 * 60);
       } else if (selected_bullet === 4) {
         var loadBar = loadBar4_2;
         var t = t4_2;
-        var coolDownTime = 360 / (10 * 15);
+        var coolDownTime = 360 / (10 * 60);
       }
     }
     var loadBar_interval = setInterval(() => {
