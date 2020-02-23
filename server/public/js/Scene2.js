@@ -229,7 +229,7 @@ class Scene2 extends Phaser.Scene {
     wand2_loadBar.mask = new Phaser.Display.Masks.BitmapMask(this, loadBar5_2);
 
     this.add
-      .rectangle(0, game.config.height / 2, game.config.width, 1, 0xff0000)
+      .rectangle(0, game.config.height / 2 - 2, game.config.width, 4, 0x212121)
       .setOrigin(0, 0);
     sprite1 = this.physics.add.sprite(
       game.config.width / 2,
@@ -329,15 +329,26 @@ class Scene2 extends Phaser.Scene {
     bullet3_2_2.setFlip(true, true);
     bullet3_2_3.setFlip(true, true);
 
-    blood_text1 = this.add.text(2, game.config.height - 48, "100", {
-      fontSize: "13px",
-      fill: "#ffffff"
-    });
-    blood_text2 = this.add.text(game.config.width - 2, 32, "100", {
-      fontSize: "13px",
-      fill: "#ffffff"
-    });
-    blood_text2.setOrigin(1, 0);
+    blood_text1 = this.add.text(
+      game.config.width / 2,
+      game.config.height / 2 + 48,
+      "",
+      {
+        fontSize: "20px",
+        fill: "#ffffff"
+      }
+    );
+    blood_text2 = this.add.text(
+      game.config.width / 2,
+      game.config.height / 2 - 48,
+      "",
+      {
+        fontSize: "20px",
+        fill: "#ffffff"
+      }
+    );
+    blood_text1.setOrigin(0.5, 0.5);
+    blood_text2.setOrigin(0.5, 0.5);
     blood_text2.setFlip(true, true);
 
     retry_icon = this.add.image(
@@ -353,12 +364,12 @@ class Scene2 extends Phaser.Scene {
     back_icon.setVisible(false);
     retry_icon.setVisible(false);
 
-    healthBar2 = this.add.sprite(game.config.width / 2, 38, "healthBar2");
-    this.healthBarMask2 = this.add.sprite(
-      game.config.width / 2,
-      38,
-      "healthBar2"
-    );
+    healthBar2 = this.add.sprite(0, 38, "healthBar2");
+    healthBar2.setOrigin(0, 0);
+    healthBar2.setCrop(0, 0, game.config.width, 100);
+    this.healthBarMask2 = this.add.sprite(0, 38, "healthBar2");
+    this.healthBarMask2.setOrigin(0, 0);
+    this.healthBarMask2.setCrop(0, 0, game.config.width, 100);
     this.healthBarMask2.setVisible(false);
 
     healthBar2.mask = new Phaser.Display.Masks.BitmapMask(
@@ -366,16 +377,16 @@ class Scene2 extends Phaser.Scene {
       this.healthBarMask2
     );
 
-    healthBar1 = this.add.sprite(
-      game.config.width / 2,
-      game.config.height - 40,
-      "healthBar"
-    );
+    healthBar1 = this.add.sprite(0, game.config.height - 40, "healthBar");
+    healthBar1.setOrigin(0, 0);
+    healthBar1.setCrop(0, 0, game.config.width, 100);
     this.healthBarMask1 = this.add.sprite(
-      game.config.width / 2,
+      0,
       game.config.height - 40,
       "healthBar"
     );
+    this.healthBarMask1.setOrigin(0, 0);
+    this.healthBarMask1.setCrop(0, 0, game.config.width, 100);
     this.healthBarMask1.setVisible(false);
     healthBar1.mask = new Phaser.Display.Masks.BitmapMask(
       this,
@@ -834,7 +845,6 @@ class Scene2 extends Phaser.Scene {
     if (blood1 > 0) {
       blood1--;
       this.healthBarMask1.x -= stepWidth;
-      blood_text1.setText(blood1);
     }
     if (blood1 === 0) {
       this.gameOver();
@@ -846,7 +856,6 @@ class Scene2 extends Phaser.Scene {
     if (blood2 > 0) {
       blood2--;
       this.healthBarMask2.x += stepWidth;
-      blood_text2.setText(blood2);
     }
     if (blood2 === 0) {
       this.gameOver();
@@ -859,9 +868,9 @@ class Scene2 extends Phaser.Scene {
   gameOver() {
     if (blood1 === 0) {
       blood_text1.setText("Lose");
-      blood_text2.setText("Win!");
+      blood_text2.setText("Win");
     } else if (blood2 === 0) {
-      blood_text1.setText("Win!");
+      blood_text1.setText("Win");
       blood_text2.setText("Lose");
     }
     background1.off("tapped");
