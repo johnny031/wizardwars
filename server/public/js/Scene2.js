@@ -270,7 +270,7 @@ class Scene2 extends Phaser.Scene {
     bullet1_2.setOrigin(0.5, 0.5);
     bullet1_2.flipY = true;
     bullet2_2 = this.physics.add.sprite(-100, -100, "fire");
-    bullet2_1.anims.play("fire");
+    bullet2_2.anims.play("fire");
 
     blood_text1 = this.add.text(2, game.config.height - 48, "100", {
       fontSize: "13px",
@@ -399,7 +399,7 @@ class Scene2 extends Phaser.Scene {
     this.physics.add.overlap(defend2, bullet2_1, this.defend, null, this);
   }
   update() {
-    spin += 30;
+    spin += 15;
     bullet1_1.angle = spin;
     bullet1_2.angle = spin;
 
