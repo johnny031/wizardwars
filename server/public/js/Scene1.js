@@ -30,11 +30,11 @@ class Scene1 extends Phaser.Scene {
     this.load.image("ship3_icon", "assets/images/ship3.png");
   }
   create() {
-    title1 = this.add.text(game.config.width / 2, 50, "The Wizard War", {
+    title1 = this.add.text(game.config.width / 2, 70, "The Wizard War", {
       fontSize: "20px",
       fill: "#ffffff"
     });
-    title2 = this.add.text(game.config.width / 2, 80, "Click to start", {
+    title2 = this.add.text(game.config.width / 2, 100, "Click to start", {
       fontSize: "15px",
       fill: "#ffffff"
     });
