@@ -9,6 +9,8 @@ class Scene1 extends Phaser.Scene {
     this.load.image("stopper", "assets/images/stopper.png");
     this.load.image("teleportation", "assets/images/teleportation.png");
     this.load.image("wand", "assets/images/shield.png");
+    this.load.image("bow", "assets/images/bow.png");
+    this.load.image("arrow", "assets/images/arrow.png");
     this.load.image("defend", "assets/images/defend.png");
     this.load.image("retry", "assets/images/retry.png");
     this.load.image("back", "assets/images/back.png");
