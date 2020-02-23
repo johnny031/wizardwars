@@ -59,6 +59,7 @@ var t1_2 = 0.0;
 var t2_2 = 0.0;
 var t3_2 = 0.0;
 var t4_2 = 0.0;
+var spin = 0;
 class Scene2 extends Phaser.Scene {
   constructor() {
     super("playGame");
@@ -88,7 +89,7 @@ class Scene2 extends Phaser.Scene {
 
     bullet1_icon1_loadBar = this.make.sprite({
       x: game.config.width / 5,
-      y: game.config.height - 16,
+      y: game.config.height - 20,
       key: "ship2_icon",
       add: true
     });
@@ -100,7 +101,7 @@ class Scene2 extends Phaser.Scene {
     });
     teleportation1_loadBar = this.make.sprite({
       x: (3 * game.config.width) / 5,
-      y: game.config.height - 16,
+      y: game.config.height - 19,
       key: "teleportation",
       add: true
     });
@@ -113,7 +114,7 @@ class Scene2 extends Phaser.Scene {
 
     bullet1_icon2_loadBar = this.make.sprite({
       x: (4 * game.config.width) / 5,
-      y: 16,
+      y: 18,
       key: "ship2_icon",
       add: true
     });
@@ -141,16 +142,16 @@ class Scene2 extends Phaser.Scene {
     wand2_loadBar.setFlip(true, true);
 
     loadBar1_1.x = game.config.width / 5;
-    loadBar1_1.y = game.config.height - 16;
+    loadBar1_1.y = game.config.height - 20;
     loadBar2_1.x = (2 * game.config.width) / 5;
     loadBar2_1.y = game.config.height - 16;
     loadBar3_1.x = (3 * game.config.width) / 5;
-    loadBar3_1.y = game.config.height - 16;
+    loadBar3_1.y = game.config.height - 19;
     loadBar4_1.x = (4 * game.config.width) / 5;
     loadBar4_1.y = game.config.height - 16;
 
     loadBar1_2.x = (4 * game.config.width) / 5;
-    loadBar1_2.y = 16;
+    loadBar1_2.y = 18;
     loadBar2_2.x = (3 * game.config.width) / 5;
     loadBar2_2.y = 16;
     loadBar3_2.x = (2 * game.config.width) / 5;
@@ -206,7 +207,7 @@ class Scene2 extends Phaser.Scene {
     stopper2.setVisible(false);
     bullet1_icon1 = this.add.image(
       game.config.width / 5,
-      game.config.height - 16,
+      game.config.height - 20,
       "ship2_icon"
     );
     bullet2_icon1 = this.add.image(
@@ -216,7 +217,7 @@ class Scene2 extends Phaser.Scene {
     );
     teleportation1 = this.add.image(
       (3 * game.config.width) / 5,
-      game.config.height - 16,
+      game.config.height - 19,
       "teleportation"
     );
     wand1 = this.add.image(
@@ -231,7 +232,7 @@ class Scene2 extends Phaser.Scene {
 
     bullet1_icon2 = this.add.image(
       (4 * game.config.width) / 5,
-      16,
+      18,
       "ship2_icon"
     );
     bullet2_icon2 = this.add.image(
@@ -250,12 +251,26 @@ class Scene2 extends Phaser.Scene {
     wand2.setFlip(true, true);
 
     bullet1_1 = this.physics.add.sprite(-100, -100, "ship2");
-    bullet2_1 = this.physics.add.sprite(-100, -100, "ship3");
+    bullet1_1.setOrigin(0.5, 0.5);
+
+    bullet2_1 = this.physics.add.sprite(-100, -100, "fire");
+    this.anims.create({
+      key: "fire",
+      frames: this.anims.generateFrameNumbers("fire", {
+        start: 0,
+        end: 59
+      }),
+      frameRate: 80,
+      repeat: -1
+    });
+    bullet2_1.setFlip(true, true);
+    bullet2_1.anims.play("fire");
 
     bullet1_2 = this.physics.add.sprite(-100, -100, "ship2");
-    bullet2_2 = this.physics.add.sprite(-100, -100, "ship3");
+    bullet1_2.setOrigin(0.5, 0.5);
     bullet1_2.flipY = true;
-    bullet2_2.flipY = true;
+    bullet2_2 = this.physics.add.sprite(-100, -100, "fire");
+    bullet2_1.anims.play("fire");
 
     blood_text1 = this.add.text(2, game.config.height - 48, "100", {
       fontSize: "13px",
@@ -384,10 +399,14 @@ class Scene2 extends Phaser.Scene {
     this.physics.add.overlap(defend2, bullet2_1, this.defend, null, this);
   }
   update() {
+    spin += 30;
+    bullet1_1.angle = spin;
+    bullet1_2.angle = spin;
+
     defend1.x = sprite1.x;
-    defend1.y = sprite1.y - 16;
+    defend1.y = sprite1.y - 28;
     defend2.x = sprite2.x;
-    defend2.y = sprite2.y + 16;
+    defend2.y = sprite2.y + 28;
   }
   loadBar(pointer, selected_bullet) {
     if (pointer.y > game.config.height / 2) {
@@ -461,6 +480,7 @@ class Scene2 extends Phaser.Scene {
   shoot(pointer, selected_bullet) {
     this.loadBar(pointer, selected_bullet);
     if (pointer.y > game.config.height / 2) {
+      var degreeAdjust = 90;
       var player = 1;
       var sprite = sprite1;
       shoot1 = false;
@@ -474,6 +494,7 @@ class Scene2 extends Phaser.Scene {
         var select_ship_function = this.select2_1;
       }
     } else {
+      var degreeAdjust = -90;
       var player = 2;
       var sprite = sprite2;
       shoot2 = false;
@@ -493,8 +514,13 @@ class Scene2 extends Phaser.Scene {
     var adjacent = pointer.x - sprite.x;
     var opposite = pointer.y - sprite.y;
     var hypotenuse = Math.sqrt(adjacent ** 2 + opposite ** 2);
-    bullet.body.velocity.x = (90 * adjacent) / hypotenuse;
-    bullet.body.velocity.y = (90 * opposite) / hypotenuse;
+    bullet.body.velocity.x = (200 * adjacent) / hypotenuse;
+    bullet.body.velocity.y = (200 * opposite) / hypotenuse;
+    bullet.angle =
+      Phaser.Math.RadToDeg(
+        Phaser.Math.Angle.Between(sprite.x, sprite.y, pointer.x, pointer.y)
+      ) + degreeAdjust;
+
     bullet_icon.alpha = 0.4;
     bullet_icon.clearTint();
     bullet_icon.off(
@@ -549,8 +575,8 @@ class Scene2 extends Phaser.Scene {
       var adjacent = pointer.x - sprite.x;
       var opposite = pointer.y - sprite.y;
       var hypotenuse = Math.sqrt(adjacent ** 2 + opposite ** 2);
-      sprite.body.velocity.x = (70 * adjacent) / hypotenuse;
-      sprite.body.velocity.y = (70 * opposite) / hypotenuse;
+      sprite.body.velocity.x = (100 * adjacent) / hypotenuse;
+      sprite.body.velocity.y = (100 * opposite) / hypotenuse;
     }
   }
   stopShip() {
