@@ -1,9 +1,11 @@
+var title1;
+var title2;
 class Scene1 extends Phaser.Scene {
   constructor() {
     super("bootGame");
   }
   preload() {
-    this.load.image("background", "assets/images/background.png");
+    this.load.image("background", "assets/images/background1.png");
     this.load.image("stopper", "assets/images/stopper.png");
     this.load.image("teleportation", "assets/images/teleportation.png");
     this.load.image("wand", "assets/images/wand.png");
@@ -28,14 +30,16 @@ class Scene1 extends Phaser.Scene {
     this.load.image("ship3_icon", "assets/images/ship3.png");
   }
   create() {
-    this.add.text(config.width / 6, 50, "The Wizard War", {
+    title1 = this.add.text(game.config.width / 2, 50, "The Wizard War", {
       fontSize: "20px",
       fill: "#ffffff"
     });
-    this.add.text(config.width / 4, 80, "Click to start", {
+    title2 = this.add.text(game.config.width / 2, 80, "Click to start", {
       fontSize: "15px",
       fill: "#ffffff"
     });
+    title1.setOrigin(0.5, 0.5);
+    title2.setOrigin(0.5, 0.5);
     this.input.on("pointerdown", this.start, this);
   }
   start() {

@@ -1,3 +1,5 @@
+var countDown;
+var countDownSeconds = 3;
 var background1;
 var background2;
 var sprite1;
@@ -62,6 +64,10 @@ class Scene2 extends Phaser.Scene {
     super("playGame");
   }
   create() {
+    this.scene.pause();
+    setTimeout(() => {
+      this.scene.resume();
+    }, 3000);
     loadBar1_1 = this.add.graphics();
     loadBar2_1 = this.add.graphics();
     loadBar3_1 = this.add.graphics();
@@ -74,57 +80,57 @@ class Scene2 extends Phaser.Scene {
     background2.setOrigin(0, 0);
     background1 = this.make.image({
       x: 0,
-      y: config.height / 2,
+      y: game.config.height / 2,
       key: "background",
       add: true
     });
     background1.setOrigin(0, 0);
 
     bullet1_icon1_loadBar = this.make.sprite({
-      x: config.width / 5,
-      y: config.height - 16,
+      x: game.config.width / 5,
+      y: game.config.height - 16,
       key: "ship2_icon",
       add: true
     });
     bullet2_icon1_loadBar = this.make.sprite({
-      x: (2 * config.width) / 5,
-      y: config.height - 16,
+      x: (2 * game.config.width) / 5,
+      y: game.config.height - 16,
       key: "ship3_icon",
       add: true
     });
     teleportation1_loadBar = this.make.sprite({
-      x: (3 * config.width) / 5,
-      y: config.height - 16,
+      x: (3 * game.config.width) / 5,
+      y: game.config.height - 16,
       key: "teleportation",
       add: true
     });
     wand1_loadBar = this.make.sprite({
-      x: (4 * config.width) / 5,
-      y: config.height - 16,
+      x: (4 * game.config.width) / 5,
+      y: game.config.height - 16,
       key: "wand",
       add: true
     });
 
     bullet1_icon2_loadBar = this.make.sprite({
-      x: (4 * config.width) / 5,
+      x: (4 * game.config.width) / 5,
       y: 16,
       key: "ship2_icon",
       add: true
     });
     bullet2_icon2_loadBar = this.make.sprite({
-      x: (3 * config.width) / 5,
+      x: (3 * game.config.width) / 5,
       y: 16,
       key: "ship3_icon",
       add: true
     });
     teleportation2_loadBar = this.make.sprite({
-      x: (2 * config.width) / 5,
+      x: (2 * game.config.width) / 5,
       y: 16,
       key: "teleportation",
       add: true
     });
     wand2_loadBar = this.make.sprite({
-      x: config.width / 5,
+      x: game.config.width / 5,
       y: 16,
       key: "wand",
       add: true
@@ -134,22 +140,22 @@ class Scene2 extends Phaser.Scene {
     teleportation2_loadBar.setFlip(true, true);
     wand2_loadBar.setFlip(true, true);
 
-    loadBar1_1.x = config.width / 5;
-    loadBar1_1.y = config.height - 16;
-    loadBar2_1.x = (2 * config.width) / 5;
-    loadBar2_1.y = config.height - 16;
-    loadBar3_1.x = (3 * config.width) / 5;
-    loadBar3_1.y = config.height - 16;
-    loadBar4_1.x = (4 * config.width) / 5;
-    loadBar4_1.y = config.height - 16;
+    loadBar1_1.x = game.config.width / 5;
+    loadBar1_1.y = game.config.height - 16;
+    loadBar2_1.x = (2 * game.config.width) / 5;
+    loadBar2_1.y = game.config.height - 16;
+    loadBar3_1.x = (3 * game.config.width) / 5;
+    loadBar3_1.y = game.config.height - 16;
+    loadBar4_1.x = (4 * game.config.width) / 5;
+    loadBar4_1.y = game.config.height - 16;
 
-    loadBar1_2.x = (4 * config.width) / 5;
+    loadBar1_2.x = (4 * game.config.width) / 5;
     loadBar1_2.y = 16;
-    loadBar2_2.x = (3 * config.width) / 5;
+    loadBar2_2.x = (3 * game.config.width) / 5;
     loadBar2_2.y = 16;
-    loadBar3_2.x = (2 * config.width) / 5;
+    loadBar3_2.x = (2 * game.config.width) / 5;
     loadBar3_2.y = 16;
-    loadBar4_2.x = config.width / 5;
+    loadBar4_2.x = game.config.width / 5;
     loadBar4_2.y = 16;
 
     bullet1_icon1_loadBar.mask = new Phaser.Display.Masks.BitmapMask(
@@ -181,16 +187,16 @@ class Scene2 extends Phaser.Scene {
     wand2_loadBar.mask = new Phaser.Display.Masks.BitmapMask(this, loadBar4_2);
 
     this.add
-      .rectangle(0, config.height / 2, config.width, 1, 0xff0000)
+      .rectangle(0, game.config.height / 2, game.config.width, 1, 0xff0000)
       .setOrigin(0, 0);
     sprite1 = this.physics.add.sprite(
-      config.width / 2,
-      (3 * config.height) / 4,
+      game.config.width / 2,
+      (3 * game.config.height) / 4,
       "ship1"
     );
     sprite2 = this.physics.add.sprite(
-      config.width / 2,
-      config.height / 4,
+      game.config.width / 2,
+      game.config.height / 4,
       "ship1"
     );
     sprite2.flipY = true;
@@ -199,34 +205,46 @@ class Scene2 extends Phaser.Scene {
     stopper1.setVisible(false);
     stopper2.setVisible(false);
     bullet1_icon1 = this.add.image(
-      config.width / 5,
-      config.height - 16,
+      game.config.width / 5,
+      game.config.height - 16,
       "ship2_icon"
     );
     bullet2_icon1 = this.add.image(
-      (2 * config.width) / 5,
-      config.height - 16,
+      (2 * game.config.width) / 5,
+      game.config.height - 16,
       "ship3_icon"
     );
     teleportation1 = this.add.image(
-      (3 * config.width) / 5,
-      config.height - 16,
+      (3 * game.config.width) / 5,
+      game.config.height - 16,
       "teleportation"
     );
-    wand1 = this.add.image((4 * config.width) / 5, config.height - 16, "wand");
+    wand1 = this.add.image(
+      (4 * game.config.width) / 5,
+      game.config.height - 16,
+      "wand"
+    );
     defend1 = this.physics.add.sprite(-50, -50, "defend");
     defend1.disableBody(false, true);
     defend2 = this.physics.add.sprite(-50, -50, "defend");
     defend2.disableBody(false, true);
 
-    bullet1_icon2 = this.add.image((4 * config.width) / 5, 16, "ship2_icon");
-    bullet2_icon2 = this.add.image((3 * config.width) / 5, 16, "ship3_icon");
+    bullet1_icon2 = this.add.image(
+      (4 * game.config.width) / 5,
+      16,
+      "ship2_icon"
+    );
+    bullet2_icon2 = this.add.image(
+      (3 * game.config.width) / 5,
+      16,
+      "ship3_icon"
+    );
     teleportation2 = this.add.image(
-      (2 * config.width) / 5,
+      (2 * game.config.width) / 5,
       16,
       "teleportation"
     );
-    wand2 = this.add.image(config.width / 5, 16, "wand");
+    wand2 = this.add.image(game.config.width / 5, 16, "wand");
     bullet1_icon2.setFlip(true, true);
     bullet2_icon2.setFlip(true, true);
     wand2.setFlip(true, true);
@@ -239,28 +257,36 @@ class Scene2 extends Phaser.Scene {
     bullet1_2.flipY = true;
     bullet2_2.flipY = true;
 
-    blood_text1 = this.add.text(2, config.height - 48, "100", {
+    blood_text1 = this.add.text(2, game.config.height - 48, "100", {
       fontSize: "13px",
       fill: "#ffffff"
     });
-    blood_text2 = this.add.text(config.width - 2, 32, "100", {
+    blood_text2 = this.add.text(game.config.width - 2, 32, "100", {
       fontSize: "13px",
       fill: "#ffffff"
     });
     blood_text2.setOrigin(1, 0);
     blood_text2.setFlip(true, true);
 
-    retry_icon = this.add.image(config.width / 4, config.height / 2, "retry");
+    retry_icon = this.add.image(
+      game.config.width / 4,
+      game.config.height / 2,
+      "retry"
+    );
     back_icon = this.add.image(
-      (3 * config.width) / 4,
-      config.height / 2,
+      (3 * game.config.width) / 4,
+      game.config.height / 2,
       "back"
     );
     back_icon.setVisible(false);
     retry_icon.setVisible(false);
 
-    healthBar2 = this.add.sprite(config.width / 2, 38, "healthBar2");
-    this.healthBarMask2 = this.add.sprite(config.width / 2, 38, "healthBar2");
+    healthBar2 = this.add.sprite(game.config.width / 2, 38, "healthBar2");
+    this.healthBarMask2 = this.add.sprite(
+      game.config.width / 2,
+      38,
+      "healthBar2"
+    );
     this.healthBarMask2.setVisible(false);
 
     healthBar2.mask = new Phaser.Display.Masks.BitmapMask(
@@ -269,13 +295,13 @@ class Scene2 extends Phaser.Scene {
     );
 
     healthBar1 = this.add.sprite(
-      config.width / 2,
-      config.height - 40,
+      game.config.width / 2,
+      game.config.height - 40,
       "healthBar"
     );
     this.healthBarMask1 = this.add.sprite(
-      config.width / 2,
-      config.height - 40,
+      game.config.width / 2,
+      game.config.height - 40,
       "healthBar"
     );
     this.healthBarMask1.setVisible(false);
@@ -283,7 +309,27 @@ class Scene2 extends Phaser.Scene {
       this,
       this.healthBarMask1
     );
-
+    countDown = this.add.text(
+      game.config.width / 2,
+      game.config.height / 2,
+      "3",
+      {
+        fontSize: "30px",
+        fill: "#ffffff"
+      }
+    );
+    countDown.setOrigin(0.5, 0.5);
+    var count_interval = setInterval(() => {
+      countDownSeconds--;
+      countDown.setText(countDownSeconds);
+      if (countDownSeconds === 0) {
+        countDown.setText("Fight");
+      } else if (countDownSeconds === -1) {
+        countDown.setText("");
+        countDownSeconds = 3;
+        clearInterval(count_interval);
+      }
+    }, 1000);
     background1.setInteractive();
     background2.setInteractive();
     bullet1_icon1.setInteractive();
@@ -344,43 +390,43 @@ class Scene2 extends Phaser.Scene {
     defend2.y = sprite2.y + 16;
   }
   loadBar(pointer, selected_bullet) {
-    if (pointer.y > 136) {
+    if (pointer.y > game.config.height / 2) {
       var start_point = -Math.PI / 2;
       if (selected_bullet === 1) {
         var loadBar = loadBar1_1;
         var t = t1_1;
-        var coolDownTime = 360 / (4 * 25);
+        var coolDownTime = 360 / (4 * 15);
       } else if (selected_bullet === 2) {
         var loadBar = loadBar2_1;
         var t = t2_1;
-        var coolDownTime = 360 / (4 * 25);
+        var coolDownTime = 360 / (4 * 15);
       } else if (selected_bullet === 3) {
         var loadBar = loadBar3_1;
         var t = t3_1;
-        var coolDownTime = 360 / (7 * 25);
+        var coolDownTime = 360 / (7 * 15);
       } else if (selected_bullet === 4) {
         var loadBar = loadBar4_1;
         var t = t4_1;
-        var coolDownTime = 360 / (10 * 25);
+        var coolDownTime = 360 / (10 * 15);
       }
     } else {
       var start_point = Math.PI / 2;
       if (selected_bullet === 1) {
         var loadBar = loadBar1_2;
         var t = t1_2;
-        var coolDownTime = 360 / (4 * 25);
+        var coolDownTime = 360 / (4 * 15);
       } else if (selected_bullet === 2) {
         var loadBar = loadBar2_2;
         var t = t2_2;
-        var coolDownTime = 360 / (4 * 25);
+        var coolDownTime = 360 / (4 * 15);
       } else if (selected_bullet === 3) {
         var loadBar = loadBar3_2;
         var t = t3_2;
-        var coolDownTime = 360 / (7 * 25);
+        var coolDownTime = 360 / (7 * 15);
       } else if (selected_bullet === 4) {
         var loadBar = loadBar4_2;
         var t = t4_2;
-        var coolDownTime = 360 / (10 * 25);
+        var coolDownTime = 360 / (10 * 15);
       }
     }
     var loadBar_interval = setInterval(() => {
@@ -414,7 +460,7 @@ class Scene2 extends Phaser.Scene {
   }
   shoot(pointer, selected_bullet) {
     this.loadBar(pointer, selected_bullet);
-    if (pointer.y > 136) {
+    if (pointer.y > game.config.height / 2) {
       var player = 1;
       var sprite = sprite1;
       shoot1 = false;
@@ -447,8 +493,8 @@ class Scene2 extends Phaser.Scene {
     var adjacent = pointer.x - sprite.x;
     var opposite = pointer.y - sprite.y;
     var hypotenuse = Math.sqrt(adjacent ** 2 + opposite ** 2);
-    bullet.body.velocity.x = (50 * adjacent) / hypotenuse;
-    bullet.body.velocity.y = (50 * opposite) / hypotenuse;
+    bullet.body.velocity.x = (90 * adjacent) / hypotenuse;
+    bullet.body.velocity.y = (90 * opposite) / hypotenuse;
     bullet_icon.alpha = 0.4;
     bullet_icon.clearTint();
     bullet_icon.off(
@@ -464,7 +510,7 @@ class Scene2 extends Phaser.Scene {
     }, 4000);
   }
   move(pointer, selected_bullet) {
-    if (pointer.y > 136) {
+    if (pointer.y > game.config.height / 2) {
       var player = 1;
       var stopper = stopper1;
       var sprite = sprite1;
@@ -485,7 +531,7 @@ class Scene2 extends Phaser.Scene {
       sprite.y = pointer.y;
       stopper.x = pointer.x;
       stopper.y = pointer.y;
-      if (pointer.y > 136) {
+      if (pointer.y > game.config.height / 2) {
         teleportation1_bool = false;
       } else {
         teleportation2_bool = false;
@@ -503,8 +549,8 @@ class Scene2 extends Phaser.Scene {
       var adjacent = pointer.x - sprite.x;
       var opposite = pointer.y - sprite.y;
       var hypotenuse = Math.sqrt(adjacent ** 2 + opposite ** 2);
-      sprite.body.velocity.x = (50 * adjacent) / hypotenuse;
-      sprite.body.velocity.y = (50 * opposite) / hypotenuse;
+      sprite.body.velocity.x = (70 * adjacent) / hypotenuse;
+      sprite.body.velocity.y = (70 * opposite) / hypotenuse;
     }
   }
   stopShip() {

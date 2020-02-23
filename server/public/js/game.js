@@ -1,10 +1,10 @@
 var config = {
   backgroundColor: 0x000000,
-  width: 256,
-  height: 272,
   scale: {
     mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    width: 400,
+    height: 544
   },
   scene: [Scene1, Scene2],
   pixelArt: true,
