@@ -14,7 +14,7 @@ window.mobileAndTabletcheck = function() {
   return check;
 };
 var width = 400;
-var height = (400 * window.innerHeight) / window.innerWidth;
+var height = (400 * screen.height) / screen.width;
 var config = {
   backgroundColor: 0x000000,
   scale: {
