@@ -850,10 +850,11 @@ class Scene2 extends Phaser.Scene {
     }, 10000);
   }
   hit1(a, b) {
-    let stepWidth = this.healthBarMask1.displayWidth / 100;
+    let stepWidth = game.config.width / 100;
     b.setVisible(false);
     if (blood1 > 0) {
       blood1--;
+      console.log(blood1);
       this.healthBarMask1.x -= stepWidth;
     }
     if (blood1 === 0) {
@@ -861,10 +862,11 @@ class Scene2 extends Phaser.Scene {
     }
   }
   hit2(a, b) {
-    let stepWidth = this.healthBarMask2.displayWidth / 100;
+    let stepWidth = game.config.width / 100;
     b.setVisible(false);
     if (blood2 > 0) {
       blood2--;
+      console.log(blood2);
       this.healthBarMask2.x += stepWidth;
     }
     if (blood2 === 0) {

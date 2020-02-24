@@ -2,7 +2,7 @@ var heightWidthRatio =
   window.innerHeight / window.innerWidth > 1
     ? window.innerHeight / window.innerWidth
     : window.innerWidth / window.innerHeight;
-var scale = screen.width < 476 ? 280 : 350;
+var scale = screen.width < 476 ? 300 : 380;
 
 var width = scale;
 var height = scale * heightWidthRatio;
