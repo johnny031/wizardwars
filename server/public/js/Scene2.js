@@ -469,6 +469,10 @@ class Scene2 extends Phaser.Scene {
       },
       this
     );
+    this.input.addPointer();
+    this.input.addPointer();
+    this.input.addPointer();
+    this.input.addPointer();
     this.physics.add.overlap(sprite1, stopper1, this.stopShip, null, this);
     this.physics.add.overlap(sprite2, stopper2, this.stopShip2, null, this);
     this.physics.add.overlap(sprite1, bullet1_2, this.hit1, null, this);
