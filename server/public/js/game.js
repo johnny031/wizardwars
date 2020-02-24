@@ -13,8 +13,10 @@ window.mobileAndTabletcheck = function() {
   })(navigator.userAgent || navigator.vendor || window.opera);
   return check;
 };
-var width = 400;
-var height = (400 * window.innerHeight) / window.innerWidth;
+var width = window.mobileAndTabletcheck() ? 400 : 400;
+var height = window.mobileAndTabletcheck()
+  ? (400 * window.innerHeight) / window.innerWidth
+  : 544;
 var config = {
   backgroundColor: 0x000000,
   scale: {
