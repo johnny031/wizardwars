@@ -113,7 +113,7 @@ class Scene2 extends Phaser.Scene {
 
     bullet1_icon1_loadBar = this.make.sprite({
       x: game.config.width / 6,
-      y: game.config.height - 20,
+      y: game.config.height - 18,
       key: "ship2_icon",
       add: true
     });
@@ -162,7 +162,7 @@ class Scene2 extends Phaser.Scene {
     });
     teleportation2_loadBar = this.make.sprite({
       x: (2 * game.config.width) / 6,
-      y: 16,
+      y: 18,
       key: "teleportation",
       add: true
     });
@@ -179,7 +179,7 @@ class Scene2 extends Phaser.Scene {
     wand2_loadBar.setFlip(true, true);
 
     loadBar1_1.x = game.config.width / 6;
-    loadBar1_1.y = game.config.height - 20;
+    loadBar1_1.y = game.config.height - 18;
     loadBar2_1.x = (2 * game.config.width) / 6;
     loadBar2_1.y = game.config.height - 16;
     loadBar3_1.x = (3 * game.config.width) / 6;
@@ -196,7 +196,7 @@ class Scene2 extends Phaser.Scene {
     loadBar3_2.x = (3 * game.config.width) / 6;
     loadBar3_2.y = 16;
     loadBar4_2.x = (2 * game.config.width) / 6;
-    loadBar4_2.y = 16;
+    loadBar4_2.y = 18;
     loadBar5_2.x = game.config.width / 6;
     loadBar5_2.y = 16;
 
@@ -256,7 +256,7 @@ class Scene2 extends Phaser.Scene {
     stopper2.setVisible(false);
     bullet1_icon1 = this.add.image(
       game.config.width / 6,
-      game.config.height - 20,
+      game.config.height - 18,
       "ship2_icon"
     );
     bullet2_icon1 = this.add.image(
@@ -297,7 +297,7 @@ class Scene2 extends Phaser.Scene {
     bullet3_icon2 = this.add.image((3 * game.config.width) / 6, 16, "bow");
     teleportation2 = this.add.image(
       (2 * game.config.width) / 6,
-      16,
+      18,
       "teleportation"
     );
     wand2 = this.add.image(game.config.width / 6, 16, "wand");
@@ -385,12 +385,12 @@ class Scene2 extends Phaser.Scene {
       this.healthBarMask2
     );
 
-    healthBar1 = this.add.sprite(0, game.config.height - 40, "healthBar");
+    healthBar1 = this.add.sprite(0, game.config.height - 41, "healthBar");
     healthBar1.setOrigin(0, 0);
     healthBar1.setCrop(0, 0, game.config.width, 100);
     this.healthBarMask1 = this.add.sprite(
       0,
-      game.config.height - 40,
+      game.config.height - 41,
       "healthBar"
     );
     this.healthBarMask1.setOrigin(0, 0);
