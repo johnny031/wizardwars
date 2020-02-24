@@ -93,11 +93,19 @@ class Scene2 extends Phaser.Scene {
     loadBar3_2 = this.add.graphics();
     loadBar4_2 = this.add.graphics();
     loadBar5_2 = this.add.graphics();
-    background2 = this.add.image(0, 0, "background");
+    background2 = this.add.tileSprite(
+      0,
+      0,
+      game.config.width,
+      game.config.height / 2,
+      "background"
+    );
     background2.setOrigin(0, 0);
-    background1 = this.make.image({
+    background1 = this.make.tileSprite({
       x: 0,
       y: game.config.height / 2,
+      width: game.config.width,
+      height: game.config.height / 2,
       key: "background",
       add: true
     });
@@ -239,7 +247,7 @@ class Scene2 extends Phaser.Scene {
     sprite2 = this.physics.add.sprite(
       game.config.width / 2,
       game.config.height / 4,
-      "ship1"
+      "ship1_green"
     );
     sprite2.flipY = true;
     stopper1 = this.physics.add.sprite(0, 0, "stopper");
@@ -732,6 +740,7 @@ class Scene2 extends Phaser.Scene {
   select3_1(pointer) {
     teleportation1_bool = false;
     bullet3_icon1.alpha = 0.4;
+    bullet3_icon1.off("selected3_1", this.select3_1, this);
     bullet3_1_1.enableBody(false, 0, 0, true, false);
     bullet3_1_2.enableBody(false, 0, 0, true, false);
     bullet3_1_3.enableBody(false, 0, 0, true, false);
@@ -798,6 +807,7 @@ class Scene2 extends Phaser.Scene {
   select3_2(pointer) {
     teleportation2_bool = false;
     bullet3_icon2.alpha = 0.4;
+    bullet3_icon2.off("selected3_2", this.select3_2, this);
     bullet3_2_1.enableBody(false, 0, 0, true, false);
     bullet3_2_2.enableBody(false, 0, 0, true, false);
     bullet3_2_3.enableBody(false, 0, 0, true, false);
@@ -883,6 +893,8 @@ class Scene2 extends Phaser.Scene {
     bullet3_icon2.off("selected3_2");
     teleportation1.off("selected_tele1");
     teleportation2.off("selected_tele2");
+    wand1.off("selected_wand1");
+    wand2.off("selected_wand2");
     back_icon.setVisible(true);
     retry_icon.setVisible(true);
   }
