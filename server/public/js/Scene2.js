@@ -74,6 +74,8 @@ var t3_2 = 0.0;
 var t4_2 = 0.0;
 var t5_2 = 0.0;
 var spin = 0;
+// var collideCount1 = 0;
+// var collideCount2 = 0;
 class Scene2 extends Phaser.Scene {
   constructor() {
     super("playGame");
@@ -249,11 +251,11 @@ class Scene2 extends Phaser.Scene {
       game.config.height / 4,
       "ship1_green"
     );
-    sprite2.flipY = true;
     stopper1 = this.physics.add.sprite(0, 0, "stopper");
     stopper2 = this.physics.add.sprite(0, 0, "stopper");
     stopper1.setVisible(false);
     stopper2.setVisible(false);
+    sprite2.flipY = true;
     bullet1_icon1 = this.add.image(
       game.config.width / 6,
       game.config.height - 18,
@@ -283,6 +285,7 @@ class Scene2 extends Phaser.Scene {
     defend1.disableBody(false, true);
     defend2 = this.physics.add.sprite(-50, -50, "defend");
     defend2.disableBody(false, true);
+    defend2.setFlip(true, true);
 
     bullet1_icon2 = this.add.image(
       (5 * game.config.width) / 6,
@@ -308,6 +311,9 @@ class Scene2 extends Phaser.Scene {
 
     bullet1_1 = this.physics.add.sprite(-100, -100, "ship2");
     bullet1_1.setOrigin(0.5, 0.5);
+    // bullet1_1.setCollideWorldBounds(true);
+    // bullet1_1.body.onWorldBounds = true;
+    // bullet1_1.setBounce(1);
 
     bullet2_1 = this.physics.add.sprite(-100, -100, "fire");
     this.anims.create({
@@ -333,6 +339,7 @@ class Scene2 extends Phaser.Scene {
     bullet3_2_1 = this.physics.add.sprite(-100, -100, "arrow");
     bullet3_2_2 = this.physics.add.sprite(-100, -100, "arrow");
     bullet3_2_3 = this.physics.add.sprite(-100, -100, "arrow");
+
     bullet3_2_1.setFlip(true, true);
     bullet3_2_2.setFlip(true, true);
     bullet3_2_3.setFlip(true, true);
@@ -473,8 +480,6 @@ class Scene2 extends Phaser.Scene {
     this.input.addPointer();
     this.input.addPointer();
     this.input.addPointer();
-    this.physics.add.overlap(sprite1, stopper1, this.stopShip, null, this);
-    this.physics.add.overlap(sprite2, stopper2, this.stopShip2, null, this);
     this.physics.add.overlap(sprite1, bullet1_2, this.hit1, null, this);
     this.physics.add.overlap(sprite1, bullet2_2, this.hit1, null, this);
     this.physics.add.overlap(sprite1, bullet3_2_1, this.hit1, null, this);
@@ -495,7 +500,14 @@ class Scene2 extends Phaser.Scene {
     this.physics.add.overlap(defend2, bullet3_1_1, this.defend, null, this);
     this.physics.add.overlap(defend2, bullet3_1_2, this.defend, null, this);
     this.physics.add.overlap(defend2, bullet3_1_3, this.defend, null, this);
+    this.physics.add.overlap(sprite1, stopper1, this.stop1, null, this);
+    this.physics.add.overlap(sprite2, stopper2, this.stop2, null, this);
+
+    // this.physics.world.on("worldbounds", this.collide);
   }
+  // collide(a) {
+  //   console.log(a);
+  // }
   update() {
     spin += 15;
     bullet1_1.angle = spin;
@@ -615,13 +627,8 @@ class Scene2 extends Phaser.Scene {
       }
     }
     bullet.setVisible(true);
-    bullet.x = sprite.x;
-    bullet.y = sprite.y;
-    var adjacent = pointer.x - sprite.x;
-    var opposite = pointer.y - sprite.y;
-    var hypotenuse = Math.sqrt(adjacent ** 2 + opposite ** 2);
-    bullet.body.velocity.x = (200 * adjacent) / hypotenuse;
-    bullet.body.velocity.y = (200 * opposite) / hypotenuse;
+    bullet.setPosition(sprite.x, sprite.y);
+    this.physics.moveTo(bullet, pointer.x, pointer.y, 200);
     bullet.angle =
       Phaser.Math.RadToDeg(
         Phaser.Math.Angle.Between(sprite.x, sprite.y, pointer.x, pointer.y)
@@ -685,10 +692,7 @@ class Scene2 extends Phaser.Scene {
     }
     if (teleportation_bool) {
       this.loadBar(pointer, selected_bullet);
-      sprite.x = pointer.x;
-      sprite.y = pointer.y;
-      stopper.x = pointer.x;
-      stopper.y = pointer.y;
+      sprite.setPosition(pointer.x, pointer.y);
       if (pointer.y > game.config.height / 2) {
         teleportation1_bool = false;
       } else {
@@ -702,22 +706,15 @@ class Scene2 extends Phaser.Scene {
         teleportation.alpha = 1;
       }, 7000);
     } else {
-      stopper.x = pointer.x;
-      stopper.y = pointer.y;
-      var adjacent = pointer.x - sprite.x;
-      var opposite = pointer.y - sprite.y;
-      var hypotenuse = Math.sqrt(adjacent ** 2 + opposite ** 2);
-      sprite.body.velocity.x = (100 * adjacent) / hypotenuse;
-      sprite.body.velocity.y = (100 * opposite) / hypotenuse;
+      stopper.setPosition(pointer.x, pointer.y);
+      this.physics.moveTo(sprite, pointer.x, pointer.y, 100);
     }
   }
-  stopShip() {
-    sprite1.body.velocity.x = 0;
-    sprite1.body.velocity.y = 0;
+  stop1() {
+    sprite1.setVelocity(0, 0);
   }
-  stopShip2() {
-    sprite2.body.velocity.x = 0;
-    sprite2.body.velocity.y = 0;
+  stop2() {
+    sprite2.setVelocity(0, 0);
   }
   select1_1() {
     teleportation1_bool = false;
@@ -742,6 +739,7 @@ class Scene2 extends Phaser.Scene {
     shoot1 = true;
   }
   select3_1(pointer) {
+    shoot1 = false;
     teleportation1_bool = false;
     bullet3_icon1.alpha = 0.4;
     bullet3_icon1.off("selected3_1", this.select3_1, this);
@@ -760,6 +758,7 @@ class Scene2 extends Phaser.Scene {
     }, 4000);
   }
   select_tele1() {
+    shoot1 = false;
     teleportation1.tint = 0xe2ff3d;
     if (bullet1_icon1.isTinted || bullet2_icon1.isTinted) {
       bullet1_icon1.clearTint();
@@ -769,6 +768,7 @@ class Scene2 extends Phaser.Scene {
     teleportation1_bool = true;
   }
   select_wand1(pointer) {
+    shoot1 = false;
     teleportation1_bool = false;
     wand1.alpha = 0.4;
     wand1.off("selected_wand1");
@@ -809,6 +809,7 @@ class Scene2 extends Phaser.Scene {
     shoot2 = true;
   }
   select3_2(pointer) {
+    shoot2 = false;
     teleportation2_bool = false;
     bullet3_icon2.alpha = 0.4;
     bullet3_icon2.off("selected3_2", this.select3_2, this);
@@ -827,6 +828,7 @@ class Scene2 extends Phaser.Scene {
     }, 4000);
   }
   select_tele2() {
+    shoot2 = false;
     if (bullet1_icon2.isTinted || bullet2_icon2.isTinted) {
       bullet1_icon2.clearTint();
       bullet2_icon2.clearTint();
@@ -836,6 +838,7 @@ class Scene2 extends Phaser.Scene {
     teleportation2_bool = true;
   }
   select_wand2(pointer) {
+    shoot2 = false;
     teleportation2_bool = false;
     wand2.alpha = 0.4;
     wand2.off("selected_wand2");
@@ -858,7 +861,6 @@ class Scene2 extends Phaser.Scene {
     b.setVisible(false);
     if (blood1 > 0) {
       blood1--;
-      console.log(blood1);
       this.healthBarMask1.x -= stepWidth;
     }
     if (blood1 === 0) {
@@ -870,7 +872,6 @@ class Scene2 extends Phaser.Scene {
     b.setVisible(false);
     if (blood2 > 0) {
       blood2--;
-      console.log(blood2);
       this.healthBarMask2.x += stepWidth;
     }
     if (blood2 === 0) {
