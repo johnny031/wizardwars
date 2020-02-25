@@ -693,6 +693,7 @@ class Scene2 extends Phaser.Scene {
     if (teleportation_bool) {
       this.loadBar(pointer, selected_bullet);
       sprite.setPosition(pointer.x, pointer.y);
+      stopper.setPosition(pointer.x, pointer.y);
       if (pointer.y > game.config.height / 2) {
         teleportation1_bool = false;
       } else {
