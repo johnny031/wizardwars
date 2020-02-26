@@ -746,9 +746,14 @@ class Scene2 extends Phaser.Scene {
         var time = 9000;
       }
     }
+    var vector = new Phaser.Math.Vector2();
+    vector.set(pointer.x - sprite.x, pointer.y - sprite.y);
     bullet.setVisible(true);
     bullet.enableBody(false, 0, 0, true, false);
-    bullet.setPosition(sprite.x, sprite.y);
+    bullet.setPosition(
+      sprite.x + vector.scale(20 / vector.length()).x,
+      sprite.y + vector.scale(20 / vector.length()).y
+    );
     this.physics.moveTo(bullet, pointer.x, pointer.y, 200);
     bullet.angle =
       Phaser.Math.RadToDeg(
@@ -843,7 +848,7 @@ class Scene2 extends Phaser.Scene {
   }
   select1_1() {
     teleportation1_bool = false;
-    bullet1_icon1.tint = 0xe2ff3d;
+    bullet1_icon1.tint = 0xb3c92e;
     if (
       bullet2_icon1.isTinted ||
       bullet4_icon1.isTinted ||
@@ -858,7 +863,7 @@ class Scene2 extends Phaser.Scene {
   }
   select2_1() {
     teleportation1_bool = false;
-    bullet2_icon1.tint = 0xe2ff3d;
+    bullet2_icon1.tint = 0xb3c92e;
     if (
       bullet1_icon1.isTinted ||
       bullet4_icon1.isTinted ||
@@ -889,7 +894,7 @@ class Scene2 extends Phaser.Scene {
   }
   select4_1() {
     teleportation1_bool = false;
-    bullet4_icon1.tint = 0xe2ff3d;
+    bullet4_icon1.tint = 0xb3c92e;
     if (
       bullet1_icon1.isTinted ||
       bullet2_icon1.isTinted ||
@@ -939,7 +944,7 @@ class Scene2 extends Phaser.Scene {
   }
   select1_2() {
     teleportation2_bool = false;
-    bullet1_icon2.tint = 0xe2ff3d;
+    bullet1_icon2.tint = 0xb3c92e;
     if (
       bullet2_icon2.isTinted ||
       bullet4_icon2.isTinted ||
@@ -954,7 +959,7 @@ class Scene2 extends Phaser.Scene {
   }
   select2_2() {
     teleportation2_bool = false;
-    bullet2_icon2.tint = 0xe2ff3d;
+    bullet2_icon2.tint = 0xb3c92e;
     if (
       bullet1_icon2.isTinted ||
       bullet4_icon2.isTinted ||
@@ -985,7 +990,7 @@ class Scene2 extends Phaser.Scene {
   }
   select4_2() {
     teleportation2_bool = false;
-    bullet4_icon2.tint = 0xe2ff3d;
+    bullet4_icon2.tint = 0xb3c92e;
     if (
       bullet1_icon2.isTinted ||
       bullet2_icon2.isTinted ||
