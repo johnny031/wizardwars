@@ -519,6 +519,17 @@ class Scene2 extends Phaser.Scene {
     wand2.on("selected_wand2", this.select_wand2, this);
     retry_icon.on("retry_event", this.retry, this);
     back_icon.on("back_event", this.back, this);
+
+    this.input.on("pointerup", function(pointer) {
+      var duration = pointer.getDuration();
+      if (duration > 4000) {
+        if (this.scene.scale.isFullscreen) {
+          this.scene.scale.stopFullscreen();
+        } else {
+          this.scene.scale.startFullscreen();
+        }
+      }
+    });
     this.input.on(
       "gameobjectdown",
       function(pointer, gameObject) {
@@ -848,7 +859,7 @@ class Scene2 extends Phaser.Scene {
   }
   select1_1() {
     teleportation1_bool = false;
-    bullet1_icon1.tint = 0xb3c92e;
+    bullet1_icon1.tint = 0x8a9c22;
     if (
       bullet2_icon1.isTinted ||
       bullet4_icon1.isTinted ||
@@ -863,7 +874,7 @@ class Scene2 extends Phaser.Scene {
   }
   select2_1() {
     teleportation1_bool = false;
-    bullet2_icon1.tint = 0xb3c92e;
+    bullet2_icon1.tint = 0x95a825;
     if (
       bullet1_icon1.isTinted ||
       bullet4_icon1.isTinted ||
@@ -910,7 +921,7 @@ class Scene2 extends Phaser.Scene {
   }
   select_tele1() {
     shoot1 = false;
-    teleportation1.tint = 0xe2ff3d;
+    teleportation1.tint = 0xe6ff59;
     if (
       bullet1_icon1.isTinted ||
       bullet2_icon1.isTinted ||
@@ -944,7 +955,7 @@ class Scene2 extends Phaser.Scene {
   }
   select1_2() {
     teleportation2_bool = false;
-    bullet1_icon2.tint = 0xb3c92e;
+    bullet1_icon2.tint = 0x8a9c22;
     if (
       bullet2_icon2.isTinted ||
       bullet4_icon2.isTinted ||
@@ -959,7 +970,7 @@ class Scene2 extends Phaser.Scene {
   }
   select2_2() {
     teleportation2_bool = false;
-    bullet2_icon2.tint = 0xb3c92e;
+    bullet2_icon2.tint = 0x95a825;
     if (
       bullet1_icon2.isTinted ||
       bullet4_icon2.isTinted ||
@@ -1016,7 +1027,7 @@ class Scene2 extends Phaser.Scene {
       bullet4_icon2.clearTint();
     }
     selected_bullet2 = 5;
-    teleportation2.tint = 0xe2ff3d;
+    teleportation2.tint = 0xe6ff59;
     teleportation2_bool = true;
   }
   select_wand2(pointer) {

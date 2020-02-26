@@ -39,7 +39,17 @@ class Scene1 extends Phaser.Scene {
     });
     title1.setOrigin(0.5, 0.5);
     title2.setOrigin(0.5, 0.5);
-    this.input.on("pointerdown", this.start, this);
+    this.input.on("pointerup", this.start, this);
+    this.input.on("pointerup", function(pointer) {
+      var duration = pointer.getDuration();
+      if (duration > 4000) {
+        if (this.scene.scale.isFullscreen) {
+          this.scene.scale.stopFullscreen();
+        } else {
+          this.scene.scale.startFullscreen();
+        }
+      }
+    });
   }
   start() {
     this.scene.start("playGame");
