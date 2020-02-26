@@ -622,7 +622,7 @@ class Scene2 extends Phaser.Scene {
       if (selected_bullet === 1) {
         var loadBar = loadBar1_1;
         var t = t1_1;
-        var coolDownTime = 360 / (6 * 50);
+        var coolDownTime = 360 / (5 * 50);
       } else if (selected_bullet === 2) {
         var loadBar = loadBar2_1;
         var t = t2_1;
@@ -630,11 +630,11 @@ class Scene2 extends Phaser.Scene {
       } else if (selected_bullet === 3) {
         var loadBar = loadBar3_1;
         var t = t3_1;
-        var coolDownTime = 360 / (9 * 50);
+        var coolDownTime = 360 / (8 * 50);
       } else if (selected_bullet === 4) {
         var loadBar = loadBar4_1;
         var t = t4_1;
-        var coolDownTime = 360 / (6 * 50);
+        var coolDownTime = 360 / (9 * 50);
       } else if (selected_bullet === 5) {
         var loadBar = loadBar5_1;
         var t = t5_1;
@@ -649,7 +649,7 @@ class Scene2 extends Phaser.Scene {
       if (selected_bullet === 1) {
         var loadBar = loadBar1_2;
         var t = t1_2;
-        var coolDownTime = 360 / (6 * 50);
+        var coolDownTime = 360 / (5 * 50);
       } else if (selected_bullet === 2) {
         var loadBar = loadBar2_2;
         var t = t2_2;
@@ -657,11 +657,11 @@ class Scene2 extends Phaser.Scene {
       } else if (selected_bullet === 3) {
         var loadBar = loadBar3_2;
         var t = t3_2;
-        var coolDownTime = 360 / (9 * 50);
+        var coolDownTime = 360 / (8 * 50);
       } else if (selected_bullet === 4) {
         var loadBar = loadBar4_2;
         var t = t4_2;
-        var coolDownTime = 360 / (6 * 50);
+        var coolDownTime = 360 / (9 * 50);
       } else if (selected_bullet === 5) {
         var loadBar = loadBar5_2;
         var t = t5_2;
@@ -712,14 +712,17 @@ class Scene2 extends Phaser.Scene {
         var bullet = bullet1_1;
         var bullet_icon = bullet1_icon1;
         var select_ship_function = this.select1_1;
+        var time = 5000;
       } else if (selected_bullet === 2) {
         var bullet = bullet2_1;
         var bullet_icon = bullet2_icon1;
         var select_ship_function = this.select2_1;
+        var time = 6000;
       } else if (selected_bullet === 4) {
         var bullet = bullet4_1;
         var bullet_icon = bullet4_icon1;
         var select_ship_function = this.select4_1;
+        var time = 9000;
       }
     } else {
       var degreeAdjust = -90;
@@ -730,14 +733,17 @@ class Scene2 extends Phaser.Scene {
         var bullet = bullet1_2;
         var bullet_icon = bullet1_icon2;
         var select_ship_function = this.select1_2;
+        var time = 5000;
       } else if (selected_bullet === 2) {
         var bullet = bullet2_2;
         var bullet_icon = bullet2_icon2;
         var select_ship_function = this.select2_2;
+        var time = 6000;
       } else if (selected_bullet === 4) {
         var bullet = bullet4_2;
         var bullet_icon = bullet4_icon2;
         var select_ship_function = this.select4_2;
+        var time = 9000;
       }
     }
     bullet.setVisible(true);
@@ -761,7 +767,7 @@ class Scene2 extends Phaser.Scene {
         select_ship_function
       );
       bullet_icon.alpha = 1;
-    }, 6000);
+    }, time);
   }
   shootArrows(pointer) {
     if (pointer.y > game.config.height / 2) {
@@ -879,7 +885,7 @@ class Scene2 extends Phaser.Scene {
     setTimeout(() => {
       bullet3_icon1.alpha = 1;
       bullet3_icon1.on("selected3_1", this.select3_1, this);
-    }, 9000);
+    }, 8000);
   }
   select4_1() {
     teleportation1_bool = false;
@@ -975,7 +981,7 @@ class Scene2 extends Phaser.Scene {
     setTimeout(() => {
       bullet3_icon2.alpha = 1;
       bullet3_icon2.on("selected3_2", this.select3_2, this);
-    }, 9000);
+    }, 8000);
   }
   select4_2() {
     teleportation2_bool = false;
