@@ -50,8 +50,7 @@ class Scene1 extends Phaser.Scene {
               ? window.innerHeight / window.innerWidth
               : 1.4;
           var scale = screen.width < 476 ? 300 : 380;
-          this.scene.scale.setGameSize(scale, scale * heightWidthRatio);
-          console.log("1");
+          this.scene.scale.resize(scale, scale * heightWidthRatio);
         } else {
           this.scene.scale.startFullscreen();
           var heightWidthRatio =
@@ -59,8 +58,7 @@ class Scene1 extends Phaser.Scene {
               ? screen.height / screen.width
               : 1.4;
           var scale = screen.width < 476 ? 300 : 380;
-          this.scene.scale.setGameSize(scale, scale * heightWidthRatio);
-          console.log("2");
+          this.scene.scale.resize(scale, scale * heightWidthRatio);
         }
       }
     });
