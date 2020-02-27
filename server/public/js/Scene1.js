@@ -48,13 +48,7 @@ class Scene1 extends Phaser.Scene {
   refresh(pointer) {
     var duration = pointer.getDuration();
     if (duration > 1000) {
-      if (this.scale.isFullscreen) {
-        this.scale.stopFullscreen();
-        // On stop fulll screen
-      } else {
-        this.scale.startFullscreen();
-      }
+      this.scale.toggleFullscreen();
     }
-    this.scene.restart();
   }
 }
