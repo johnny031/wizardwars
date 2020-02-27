@@ -46,12 +46,6 @@ class Scene1 extends Phaser.Scene {
         this.scene.scale.toggleFullscreen();
       }
     });
-    this.scale.on("enterfullscreen", function() {
-      var heightWidthRatio =
-        screen.height / screen.width > 1 ? screen.height / screen.width : 1.4;
-      var scale = screen.width < 476 ? 300 : 380;
-      this.scale.setGameSize(scale, scale * heightWidthRatio);
-    });
   }
   start() {
     this.scene.start("playGame");
