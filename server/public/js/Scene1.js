@@ -43,25 +43,16 @@ class Scene1 extends Phaser.Scene {
     this.input.on("pointerup", function(pointer) {
       var duration = pointer.getDuration();
       if (duration > 1000) {
-        if (this.scene.scale.isFullscreen) {
-          this.scene.scale.stopFullscreen();
-          var heightWidthRatio =
-            window.innerHeight / window.innerWidth > 1
-              ? window.innerHeight / window.innerWidth
-              : 1.4;
-          var scale = screen.width < 476 ? 300 : 380;
-          this.scene.scale.resize(scale, scale * heightWidthRatio);
-        } else {
-          this.scene.scale.startFullscreen();
-          var heightWidthRatio =
-            screen.height / screen.width > 1
-              ? screen.height / screen.width
-              : 1.4;
-          var scale = screen.width < 476 ? 300 : 380;
-          this.scene.scale.resize(scale, scale * heightWidthRatio);
-        }
+        this.scene.scale.toggleFullscreen();
       }
     });
+    //bugs here
+    // this.scale.on("enterfullscreen", function() {
+    //   var heightWidthRatio =
+    //     screen.height / screen.width > 1 ? screen.height / screen.width : 1.4;
+    //   var scale = screen.width < 476 ? 300 : 380;
+    //   this.scale.resize(scale, scale * heightWidthRatio);
+    // });
   }
   start() {
     this.scene.start("playGame");
