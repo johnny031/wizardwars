@@ -8,7 +8,7 @@ var height = scale * heightWidthRatio;
 var config = {
   backgroundColor: 0x000000,
   scale: {
-    mode: Phaser.Scale.WIDTH_CONTROLS_HEIGHT,
+    mode: Phaser.Scale.ENVELOP,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: width,
     height: height
