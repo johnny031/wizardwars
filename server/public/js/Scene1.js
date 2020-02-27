@@ -1,5 +1,7 @@
 var title1;
 var title2;
+var title3;
+var title4;
 class Scene1 extends Phaser.Scene {
   constructor() {
     super("bootGame");
@@ -37,8 +39,28 @@ class Scene1 extends Phaser.Scene {
       fontSize: "15px",
       fill: "#ffffff"
     });
+    title3 = this.add.text(
+      game.config.width / 2,
+      360,
+      "Press 2 sec to enter full screen",
+      {
+        fontSize: "13px",
+        fill: "#c2c2c2"
+      }
+    );
+    title4 = this.add.text(
+      game.config.width / 2,
+      390,
+      "(Only support Android with Chrome)",
+      {
+        fontSize: "11px",
+        fill: "#c2c2c2"
+      }
+    );
     title1.setOrigin(0.5, 0.5);
     title2.setOrigin(0.5, 0.5);
+    title3.setOrigin(0.5, 0.5);
+    title4.setOrigin(0.5, 0.5);
     this.input.on("pointerup", this.refresh, this);
     this.input.on("pointerup", this.start, this);
   }
@@ -47,7 +69,7 @@ class Scene1 extends Phaser.Scene {
   }
   refresh(pointer) {
     var duration = pointer.getDuration();
-    if (duration > 1000) {
+    if (duration > 2000) {
       this.scale.toggleFullscreen();
     }
   }

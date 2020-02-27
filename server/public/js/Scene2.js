@@ -522,8 +522,8 @@ class Scene2 extends Phaser.Scene {
 
     this.input.on("pointerup", function(pointer) {
       var duration = pointer.getDuration();
-      if (duration > 1000) {
-        this.scale.toggleFullscreen();
+      if (duration > 2000) {
+        this.scene.scale.toggleFullscreen();
       }
     });
     this.input.on(
