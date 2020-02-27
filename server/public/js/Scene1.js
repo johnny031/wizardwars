@@ -53,12 +53,6 @@ class Scene1 extends Phaser.Scene {
         // On stop fulll screen
       } else {
         this.scale.startFullscreen();
-        // screen.height / screen.width > 1
-        //   ? screen.height / screen.width
-        //   : 1.4;
-        let div = document.getElementById("phaser_app");
-        div.style.width = screen.width + "px";
-        div.style.height = screen.height + "px";
       }
     }
     this.scene.restart();
