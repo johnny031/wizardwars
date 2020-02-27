@@ -43,6 +43,8 @@ class Scene1 extends Phaser.Scene {
     this.input.on("pointerup", function(pointer) {
       var duration = pointer.getDuration();
       if (duration > 1000) {
+        alert(screen.width);
+        alert(screen.height);
         if (this.scene.scale.isFullscreen) {
           this.scene.scale.stopFullscreen();
           // On stop fulll screen
