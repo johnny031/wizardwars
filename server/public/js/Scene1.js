@@ -48,7 +48,6 @@ class Scene1 extends Phaser.Scene {
           // On stop fulll screen
         } else {
           this.scene.scale.startFullscreen();
-          // this.scene.scale.resize(screen.width, screen.height);
         }
       }
     });

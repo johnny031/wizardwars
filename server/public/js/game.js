@@ -1,14 +1,12 @@
 var heightWidthRatio =
-  window.innerHeight / window.innerWidth > 1
-    ? window.innerHeight / window.innerWidth
-    : 1.4;
+  screen.height / screen.width > 1 ? screen.height / screen.width : 1.4;
 var scale = screen.width < 476 ? 300 : 380;
 var width = scale;
 var height = scale * heightWidthRatio;
 var config = {
   backgroundColor: 0x000000,
   scale: {
-    mode: Phaser.Scale.ENVELOP,
+    mode: Phaser.Scale.HEIGHT_CONTROLS_WIDTH,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: width,
     height: height

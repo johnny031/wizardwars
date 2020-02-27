@@ -528,8 +528,9 @@ class Scene2 extends Phaser.Scene {
           // On stop fulll screen
         } else {
           this.scene.scale.startFullscreen();
-          // this.scene.scale.width = 300;
-          // this.scene.scale.height = 550;
+          // this.scene.scale.scaleMode =
+          //   Phaser.Scale.ScaleModes.HEIGHT_CONTROLS_WIDTH;
+          // this.scene.scale.resize(300, (300 * screen.height) / screen.width);
         }
       }
     });
