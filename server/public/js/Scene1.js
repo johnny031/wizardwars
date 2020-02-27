@@ -56,9 +56,9 @@ class Scene1 extends Phaser.Scene {
         // screen.height / screen.width > 1
         //   ? screen.height / screen.width
         //   : 1.4;
-        let div = document.getElementById("phaser_app");
-        div.style.width = screen.width + "px";
-        div.style.height = screen.height + "px";
+        let canvas = document.getElementsByTagName("canvas");
+        canvas.style.width = screen.width + "px";
+        canvas.style.height = screen.height + "px";
       }
     }
     this.scene.restart();
