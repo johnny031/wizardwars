@@ -523,17 +523,13 @@ class Scene2 extends Phaser.Scene {
     this.input.on("pointerup", function(pointer) {
       var duration = pointer.getDuration();
       if (duration > 1000) {
-        alert(screen.width);
-        alert(screen.height);
         if (this.scene.scale.isFullscreen) {
           this.scene.scale.stopFullscreen();
           // On stop fulll screen
         } else {
           this.scene.scale.startFullscreen();
-          this.scene.scale.setGameSize(
-            300,
-            (300 * screen.height) / screen.width
-          );
+          // this.scene.scale.width = 300;
+          // this.scene.scale.height = 550;
         }
       }
     });
