@@ -890,6 +890,7 @@ class Scene2 extends Phaser.Scene {
     bullet3_icon1.off("selected3_1", this.select3_1, this);
     bullet1_icon1.clearTint();
     bullet2_icon1.clearTint();
+    bullet4_icon1.clearTint();
     teleportation1.clearTint();
     selected_bullet1 = 3;
     this.loadBar(pointer, selected_bullet1);
@@ -938,6 +939,7 @@ class Scene2 extends Phaser.Scene {
     defend1.enableBody(false, 0, 0, true, true);
     bullet1_icon1.clearTint();
     bullet2_icon1.clearTint();
+    bullet4_icon1.clearTint();
     teleportation1.clearTint();
     selected_bullet1 = 6;
     this.loadBar(pointer, selected_bullet1);
@@ -986,6 +988,7 @@ class Scene2 extends Phaser.Scene {
     bullet3_icon2.off("selected3_2", this.select3_2, this);
     bullet1_icon2.clearTint();
     bullet2_icon2.clearTint();
+    bullet4_icon2.clearTint();
     teleportation2.clearTint();
     selected_bullet2 = 3;
     this.loadBar(pointer, selected_bullet2);
@@ -1035,6 +1038,7 @@ class Scene2 extends Phaser.Scene {
     this.loadBar(pointer, selected_bullet2);
     bullet1_icon2.clearTint();
     bullet2_icon2.clearTint();
+    bullet4_icon2.clearTint();
     teleportation2.clearTint();
     defend2.enableBody(false, 0, 0, true, true);
     setTimeout(() => {
