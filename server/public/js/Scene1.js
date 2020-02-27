@@ -39,20 +39,28 @@ class Scene1 extends Phaser.Scene {
     });
     title1.setOrigin(0.5, 0.5);
     title2.setOrigin(0.5, 0.5);
+    this.input.on("pointerup", this.refresh, this);
     this.input.on("pointerup", this.start, this);
-    this.input.on("pointerup", function(pointer) {
-      var duration = pointer.getDuration();
-      if (duration > 1000) {
-        if (this.scene.scale.isFullscreen) {
-          this.scene.scale.stopFullscreen();
-          // On stop fulll screen
-        } else {
-          this.scene.scale.startFullscreen();
-        }
-      }
-    });
   }
   start() {
     this.scene.start("playGame");
+  }
+  refresh(pointer) {
+    var duration = pointer.getDuration();
+    if (duration > 1000) {
+      if (this.scale.isFullscreen) {
+        this.scale.stopFullscreen();
+        // On stop fulll screen
+      } else {
+        this.scale.startFullscreen();
+        // screen.height / screen.width > 1
+        //   ? screen.height / screen.width
+        //   : 1.4;
+        let div = document.getElementById("phaser_app");
+        div.style.width = screen.width + "px";
+        div.style.height = screen.height + "px";
+      }
+    }
+    this.scene.restart();
   }
 }

@@ -1,9 +1,12 @@
 var heightWidthRatio =
-  screen.height / screen.width > 1 ? screen.height / screen.width : 1.4;
+  window.innerHeight / window.innerWidth > 1
+    ? window.innerHeight / window.innerWidth
+    : 1.4;
 var scale = screen.width < 476 ? 300 : 380;
 var width = scale;
 var height = scale * heightWidthRatio;
 var config = {
+  parent: "phaser_app",
   backgroundColor: 0x000000,
   scale: {
     mode: Phaser.Scale.HEIGHT_CONTROLS_WIDTH,
