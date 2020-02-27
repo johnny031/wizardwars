@@ -9,7 +9,7 @@ var config = {
   parent: "phaser_app",
   backgroundColor: 0x000000,
   scale: {
-    mode: Phaser.Scale.HEIGHT_CONTROLS_WIDTH,
+    mode: Phaser.Scale.WIDTH_CONTROLS_HEIGHT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: width,
     height: height
