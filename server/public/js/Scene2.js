@@ -629,54 +629,54 @@ class Scene2 extends Phaser.Scene {
       if (selected_bullet === 1) {
         var loadBar = loadBar1_1;
         var t = t1_1;
-        var coolDownTime = 360 / (5 * 50);
+        var coolDownTime = 360 / (5 * 10);
       } else if (selected_bullet === 2) {
         var loadBar = loadBar2_1;
         var t = t2_1;
-        var coolDownTime = 360 / (6 * 50);
+        var coolDownTime = 360 / (6 * 10);
       } else if (selected_bullet === 3) {
         var loadBar = loadBar3_1;
         var t = t3_1;
-        var coolDownTime = 360 / (8 * 50);
+        var coolDownTime = 360 / (8 * 10);
       } else if (selected_bullet === 4) {
         var loadBar = loadBar4_1;
         var t = t4_1;
-        var coolDownTime = 360 / (9 * 50);
+        var coolDownTime = 360 / (9 * 10);
       } else if (selected_bullet === 5) {
         var loadBar = loadBar5_1;
         var t = t5_1;
-        var coolDownTime = 360 / (7 * 50);
+        var coolDownTime = 360 / (7 * 10);
       } else if (selected_bullet === 6) {
         var loadBar = loadBar6_1;
         var t = t6_1;
-        var coolDownTime = 360 / (10 * 50);
+        var coolDownTime = 360 / (10 * 10);
       }
     } else {
       var start_point = Math.PI / 2;
       if (selected_bullet === 1) {
         var loadBar = loadBar1_2;
         var t = t1_2;
-        var coolDownTime = 360 / (5 * 50);
+        var coolDownTime = 360 / (5 * 10);
       } else if (selected_bullet === 2) {
         var loadBar = loadBar2_2;
         var t = t2_2;
-        var coolDownTime = 360 / (6 * 50);
+        var coolDownTime = 360 / (6 * 10);
       } else if (selected_bullet === 3) {
         var loadBar = loadBar3_2;
         var t = t3_2;
-        var coolDownTime = 360 / (8 * 50);
+        var coolDownTime = 360 / (8 * 10);
       } else if (selected_bullet === 4) {
         var loadBar = loadBar4_2;
         var t = t4_2;
-        var coolDownTime = 360 / (9 * 50);
+        var coolDownTime = 360 / (9 * 10);
       } else if (selected_bullet === 5) {
         var loadBar = loadBar5_2;
         var t = t5_2;
-        var coolDownTime = 360 / (7 * 50);
+        var coolDownTime = 360 / (7 * 10);
       } else if (selected_bullet === 6) {
         var loadBar = loadBar6_2;
         var t = t6_2;
-        var coolDownTime = 360 / (10 * 50);
+        var coolDownTime = 360 / (10 * 10);
       }
     }
     var loadBar_interval = setInterval(() => {
@@ -692,7 +692,7 @@ class Scene2 extends Phaser.Scene {
         clearInterval(loadBar_interval);
         t = 0.0;
       }
-    }, 1000 / 60);
+    }, 100);
   }
   shootOrMove1(pointer) {
     if (shoot1) {
@@ -1060,6 +1060,9 @@ class Scene2 extends Phaser.Scene {
     if (blood1 === 0) {
       this.gameOver();
     }
+    if (b.width === 30) {
+      collideCount2 = 0;
+    }
   }
   hit2(a, b) {
     let stepWidth = game.config.width / 100;
@@ -1071,6 +1074,9 @@ class Scene2 extends Phaser.Scene {
     }
     if (blood2 === 0) {
       this.gameOver();
+    }
+    if (b.width === 31) {
+      collideCount1 = 0;
     }
   }
   defend(a, b) {
@@ -1105,11 +1111,15 @@ class Scene2 extends Phaser.Scene {
   back() {
     blood1 = 100;
     blood2 = 100;
+    collideCount1 = 0;
+    collideCount2 = 0;
     this.scene.start("bootGame");
   }
   retry() {
     blood1 = 100;
     blood2 = 100;
+    collideCount1 = 0;
+    collideCount2 = 0;
     this.scene.start("playGame");
   }
 }
