@@ -67,6 +67,7 @@ class Scene1 extends Phaser.Scene {
     title4.setOrigin(0.5, 0.5);
     this.input.on("pointerup", this.refresh, this);
     this.input.on("pointerup", this.start, this);
+    this.scale.lockOrientation("portrait");
   }
   start() {
     this.scene.start("playGame");
