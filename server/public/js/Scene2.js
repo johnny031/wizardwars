@@ -1117,6 +1117,12 @@ class Scene2 extends Phaser.Scene {
     bullet4_icon1.tint = 0x636363;
     teleportation1.tint = 0x636363;
     wand1.tint = 0x636363;
+    bullet1_icon1_loadBar.tint = 0xa3a3a3;
+    bullet2_icon1_loadBar.tint = 0xa3a3a3;
+    bullet3_icon1_loadBar.tint = 0xa3a3a3;
+    bullet4_icon1_loadBar.tint = 0xa3a3a3;
+    teleportation1_loadBar.tint = 0x636363;
+    wand1_loadBar.tint = 0xa3a3a3;
   }
   clearTint1() {
     bullet1_icon1.clearTint();
@@ -1125,6 +1131,12 @@ class Scene2 extends Phaser.Scene {
     bullet4_icon1.clearTint();
     teleportation1.clearTint();
     wand1.clearTint();
+    bullet1_icon1_loadBar.clearTint();
+    bullet2_icon1_loadBar.clearTint();
+    bullet3_icon1_loadBar.clearTint();
+    bullet4_icon1_loadBar.clearTint();
+    teleportation1_loadBar.clearTint();
+    wand1_loadBar.clearTint();
   }
   tintBlack2() {
     bullet1_icon2.tint = 0x636363;
@@ -1133,6 +1145,12 @@ class Scene2 extends Phaser.Scene {
     bullet4_icon2.tint = 0x636363;
     teleportation2.tint = 0x636363;
     wand2.tint = 0x636363;
+    bullet1_icon2_loadBar.tint = 0xa3a3a3;
+    bullet2_icon2_loadBar.tint = 0xa3a3a3;
+    bullet3_icon2_loadBar.tint = 0xa3a3a3;
+    bullet4_icon2_loadBar.tint = 0xa3a3a3;
+    teleportation2_loadBar.tint = 0x636363;
+    wand2_loadBar.tint = 0xa3a3a3;
   }
   clearTint2() {
     bullet1_icon2.clearTint();
@@ -1141,6 +1159,12 @@ class Scene2 extends Phaser.Scene {
     bullet4_icon2.clearTint();
     teleportation2.clearTint();
     wand2.clearTint();
+    bullet1_icon2_loadBar.clearTint();
+    bullet2_icon2_loadBar.clearTint();
+    bullet3_icon2_loadBar.clearTint();
+    bullet4_icon2_loadBar.clearTint();
+    teleportation2_loadBar.clearTint();
+    wand2_loadBar.clearTint();
   }
   burn1() {
     sprite1.setVelocity(0, 0);
