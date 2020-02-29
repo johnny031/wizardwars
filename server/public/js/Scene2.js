@@ -389,11 +389,11 @@ class Scene2 extends Phaser.Scene {
         start: 0,
         end: 49
       }),
-      frameRate: 60,
+      frameRate: 45,
       repeat: -1
     });
-    // burn1.anims.play("burning");
-    // burn2.anims.play("burning");
+    burn1.anims.play("burning");
+    burn2.anims.play("burning");
     bullet2_1.setFlip(true, true);
     bullet2_1.anims.play("fire");
     bullet3_1_1 = this.physics.add.sprite(-100, -100, "arrow");
@@ -1090,7 +1090,6 @@ class Scene2 extends Phaser.Scene {
     }
   }
   burn1() {
-    burn1.anims.play("burning");
     sprite1.setVelocity(0, 0);
     sprite1.tint = 0x919191;
     burn1.setVisible(true);
@@ -1123,11 +1122,9 @@ class Scene2 extends Phaser.Scene {
       bullet4_icon1.clearTint();
       teleportation1.clearTint();
       wand1.clearTint();
-      burn1.anims.stop("burning");
     }, 3000);
   }
   burn2() {
-    burn2.anims.play("burning");
     sprite2.setVelocity(0, 0);
     sprite2.tint = 0x919191;
     burn2.setVisible(true);
@@ -1160,7 +1157,6 @@ class Scene2 extends Phaser.Scene {
       bullet4_icon2.clearTint();
       teleportation2.clearTint();
       wand2.clearTint();
-      burn2.anims.stop("burning");
     }, 3000);
   }
   defend(a, b) {
