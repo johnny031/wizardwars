@@ -374,17 +374,15 @@ class Scene2 extends Phaser.Scene {
       frameRate: 80,
       repeat: -1
     });
-    burn1 = this.physics.add.sprite(-100, -100, "burn");
-    burn2 = this.physics.add.sprite(-100, -100, "burn");
+    burn1 = this.physics.add.sprite(100, 200, "burn");
+    burn2 = this.physics.add.sprite(100, 100, "burn");
     burn1.setOrigin(0.5, 0.7);
-    burn1.alpha = 0.6;
+    burn1.alpha = 1;
     burn1.setVisible(false);
     burn2.setOrigin(0.5, 0.3);
-    burn2.alpha = 0.6;
+    burn2.alpha = 1;
     burn2.setVisible(false);
     burn2.setFlip(true, true);
-    // sprite1.tint = 0x919191;
-    // sprite2.tint = 0x919191;
     this.anims.create({
       key: "burning",
       frames: this.anims.generateFrameNumbers("burn", {
@@ -1092,10 +1090,10 @@ class Scene2 extends Phaser.Scene {
     }
   }
   burn1() {
-    burn1.setVisible(true);
+    burn1.anims.play("burning");
     sprite1.setVelocity(0, 0);
     sprite1.tint = 0x919191;
-    burn1.anims.play("burning");
+    burn1.setVisible(true);
     background1.disableInteractive();
     bullet1_icon1.disableInteractive();
     bullet2_icon1.disableInteractive();
@@ -1129,10 +1127,10 @@ class Scene2 extends Phaser.Scene {
     }, 3000);
   }
   burn2() {
-    burn2.setVisible(true);
+    burn2.anims.play("burning");
     sprite2.setVelocity(0, 0);
     sprite2.tint = 0x919191;
-    burn2.anims.play("burning");
+    burn2.setVisible(true);
     background2.disableInteractive();
     bullet1_icon2.disableInteractive();
     bullet2_icon2.disableInteractive();
