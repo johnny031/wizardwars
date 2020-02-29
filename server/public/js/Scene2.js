@@ -389,7 +389,7 @@ class Scene2 extends Phaser.Scene {
         start: 0,
         end: 49
       }),
-      frameRate: 40,
+      frameRate: 30,
       repeat: -1
     });
     burn1.anims.play("burning");
