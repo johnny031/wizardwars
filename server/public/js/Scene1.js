@@ -27,6 +27,10 @@ class Scene1 extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64
     });
+    this.load.spritesheet("burn", "assets/spritesheets/burn_64.png", {
+      frameWidth: 64,
+      frameHeight: 64
+    });
     this.load.image("ship2_icon", "assets/images/Shuriken.png");
     this.load.image("ship3_icon", "assets/images/fire.png");
   }

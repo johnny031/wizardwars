@@ -84,6 +84,8 @@ var t4_2 = 0.0;
 var t5_2 = 0.0;
 var t6_2 = 0.0;
 var spin = 0;
+var burn1;
+var burn2;
 var collideCount1 = 0;
 var collideCount2 = 0;
 class Scene2 extends Phaser.Scene {
@@ -372,6 +374,28 @@ class Scene2 extends Phaser.Scene {
       frameRate: 80,
       repeat: -1
     });
+    burn1 = this.physics.add.sprite(-100, -100, "burn");
+    burn2 = this.physics.add.sprite(-100, -100, "burn");
+    burn1.setOrigin(0.5, 0.7);
+    burn1.alpha = 0.6;
+    burn1.setVisible(false);
+    burn2.setOrigin(0.5, 0.3);
+    burn2.alpha = 0.6;
+    burn2.setVisible(false);
+    burn2.setFlip(true, true);
+    // sprite1.tint = 0x919191;
+    // sprite2.tint = 0x919191;
+    this.anims.create({
+      key: "burning",
+      frames: this.anims.generateFrameNumbers("burn", {
+        start: 0,
+        end: 49
+      }),
+      frameRate: 60,
+      repeat: -1
+    });
+    // burn1.anims.play("burning");
+    // burn2.anims.play("burning");
     bullet2_1.setFlip(true, true);
     bullet2_1.anims.play("fire");
     bullet3_1_1 = this.physics.add.sprite(-100, -100, "arrow");
@@ -602,10 +626,10 @@ class Scene2 extends Phaser.Scene {
     bullet4_1.angle = spin;
     bullet4_2.angle = spin;
 
-    defend1.x = sprite1.x;
-    defend1.y = sprite1.y - 28;
-    defend2.x = sprite2.x;
-    defend2.y = sprite2.y + 28;
+    burn1.setPosition(sprite1.x, sprite1.y);
+    burn2.setPosition(sprite2.x, sprite2.y);
+    defend1.setPosition(sprite1.x, sprite1.y - 28);
+    defend2.setPosition(sprite2.x, sprite2.y + 28);
     if (
       bullet4_1.x < -bullet4_1.width / 2 ||
       bullet4_1.x > game.config.width + bullet4_1.width / 2 ||
@@ -713,44 +737,36 @@ class Scene2 extends Phaser.Scene {
     this.loadBar(pointer, selected_bullet);
     if (pointer.y > game.config.height / 2) {
       var degreeAdjust = 90;
-      var player = 1;
       var sprite = sprite1;
       shoot1 = false;
       if (selected_bullet === 1) {
         var bullet = bullet1_1;
         var bullet_icon = bullet1_icon1;
-        var select_ship_function = this.select1_1;
         var time = 5000;
       } else if (selected_bullet === 2) {
         var bullet = bullet2_1;
         var bullet_icon = bullet2_icon1;
-        var select_ship_function = this.select2_1;
         var time = 6000;
       } else if (selected_bullet === 4) {
         var bullet = bullet4_1;
         var bullet_icon = bullet4_icon1;
-        var select_ship_function = this.select4_1;
         var time = 9000;
       }
     } else {
       var degreeAdjust = -90;
-      var player = 2;
       var sprite = sprite2;
       shoot2 = false;
       if (selected_bullet === 1) {
         var bullet = bullet1_2;
         var bullet_icon = bullet1_icon2;
-        var select_ship_function = this.select1_2;
         var time = 5000;
       } else if (selected_bullet === 2) {
         var bullet = bullet2_2;
         var bullet_icon = bullet2_icon2;
-        var select_ship_function = this.select2_2;
         var time = 6000;
       } else if (selected_bullet === 4) {
         var bullet = bullet4_2;
         var bullet_icon = bullet4_icon2;
-        var select_ship_function = this.select4_2;
         var time = 9000;
       }
     }
@@ -770,15 +786,9 @@ class Scene2 extends Phaser.Scene {
 
     bullet_icon.alpha = 0.4;
     bullet_icon.clearTint();
-    bullet_icon.off(
-      "selected" + selected_bullet + "_" + player,
-      select_ship_function
-    );
+    bullet_icon.disableInteractive();
     setTimeout(() => {
-      bullet_icon.on(
-        "selected" + selected_bullet + "_" + player,
-        select_ship_function
-      );
+      bullet_icon.setInteractive();
       bullet_icon.alpha = 1;
     }, time);
   }
@@ -813,19 +823,15 @@ class Scene2 extends Phaser.Scene {
   }
   move(pointer, selected_bullet) {
     if (pointer.y > game.config.height / 2) {
-      var player = 1;
       var stopper = stopper1;
       var sprite = sprite1;
       var teleportation = teleportation1;
       var teleportation_bool = teleportation1_bool;
-      var select_tele_function = this.select_tele1;
     } else {
-      var player = 2;
       var stopper = stopper2;
       var sprite = sprite2;
       var teleportation = teleportation2;
       var teleportation_bool = teleportation2_bool;
-      var select_tele_function = this.select_tele2;
     }
     if (teleportation_bool) {
       this.loadBar(pointer, selected_bullet);
@@ -838,10 +844,9 @@ class Scene2 extends Phaser.Scene {
       }
       teleportation.alpha = 0.4;
       teleportation.clearTint();
-      teleportation.off("selected_tele" + player, select_tele_function, this);
+      teleportation.disableInteractive();
       setTimeout(() => {
-        teleportation.on("selected_tele" + player, select_tele_function, this);
-        teleportation.alpha = 1;
+        teleportation.setInteractive();
       }, 7000);
     } else {
       stopper.setPosition(pointer.x, pointer.y);
@@ -888,7 +893,7 @@ class Scene2 extends Phaser.Scene {
     shoot1 = false;
     teleportation1_bool = false;
     bullet3_icon1.alpha = 0.4;
-    bullet3_icon1.off("selected3_1", this.select3_1, this);
+    bullet3_icon1.disableInteractive();
     bullet1_icon1.clearTint();
     bullet2_icon1.clearTint();
     bullet4_icon1.clearTint();
@@ -898,7 +903,7 @@ class Scene2 extends Phaser.Scene {
     this.shootArrows(pointer);
     setTimeout(() => {
       bullet3_icon1.alpha = 1;
-      bullet3_icon1.on("selected3_1", this.select3_1, this);
+      bullet3_icon1.setInteractive();
     }, 8000);
   }
   select4_1() {
@@ -936,7 +941,7 @@ class Scene2 extends Phaser.Scene {
     shoot1 = false;
     teleportation1_bool = false;
     wand1.alpha = 0.4;
-    wand1.off("selected_wand1");
+    wand1.disableInteractive();
     defend1.enableBody(false, 0, 0, true, true);
     bullet1_icon1.clearTint();
     bullet2_icon1.clearTint();
@@ -949,7 +954,7 @@ class Scene2 extends Phaser.Scene {
     }, 1000);
     setTimeout(() => {
       wand1.alpha = 1;
-      wand1.on("selected_wand1", this.select_wand1, this);
+      wand1.setInteractive();
     }, 10000);
   }
   select1_2() {
@@ -986,7 +991,7 @@ class Scene2 extends Phaser.Scene {
     shoot2 = false;
     teleportation2_bool = false;
     bullet3_icon2.alpha = 0.4;
-    bullet3_icon2.off("selected3_2", this.select3_2, this);
+    bullet3_icon2.disableInteractive();
     bullet1_icon2.clearTint();
     bullet2_icon2.clearTint();
     bullet4_icon2.clearTint();
@@ -996,7 +1001,7 @@ class Scene2 extends Phaser.Scene {
     this.shootArrows(pointer);
     setTimeout(() => {
       bullet3_icon2.alpha = 1;
-      bullet3_icon2.on("selected3_2", this.select3_2, this);
+      bullet3_icon2.setInteractive();
     }, 8000);
   }
   select4_2() {
@@ -1034,7 +1039,7 @@ class Scene2 extends Phaser.Scene {
     shoot2 = false;
     teleportation2_bool = false;
     wand2.alpha = 0.4;
-    wand2.off("selected_wand2");
+    wand2.disableInteractive();
     selected_bullet2 = 6;
     this.loadBar(pointer, selected_bullet2);
     bullet1_icon2.clearTint();
@@ -1047,7 +1052,7 @@ class Scene2 extends Phaser.Scene {
     }, 1000);
     setTimeout(() => {
       wand2.alpha = 1;
-      wand2.on("selected_wand2", this.select_wand2, this);
+      wand2.setInteractive();
     }, 10000);
   }
   hit1(a, b) {
@@ -1064,6 +1069,9 @@ class Scene2 extends Phaser.Scene {
     if (b.width === 30) {
       collideCount2 = 0;
     }
+    if (b.width === 64) {
+      this.burn1();
+    }
   }
   hit2(a, b) {
     let stepWidth = game.config.width / 100;
@@ -1079,6 +1087,83 @@ class Scene2 extends Phaser.Scene {
     if (b.width === 31) {
       collideCount1 = 0;
     }
+    if (b.width === 64) {
+      this.burn2();
+    }
+  }
+  burn1() {
+    burn1.setVisible(true);
+    sprite1.setVelocity(0, 0);
+    sprite1.tint = 0x919191;
+    burn1.anims.play("burning");
+    background1.disableInteractive();
+    bullet1_icon1.disableInteractive();
+    bullet2_icon1.disableInteractive();
+    bullet3_icon1.disableInteractive();
+    bullet4_icon1.disableInteractive();
+    teleportation1.disableInteractive();
+    wand1.disableInteractive();
+    bullet1_icon1.tint = 0x636363;
+    bullet2_icon1.tint = 0x636363;
+    bullet3_icon1.tint = 0x636363;
+    bullet4_icon1.tint = 0x636363;
+    teleportation1.tint = 0x636363;
+    wand1.tint = 0x636363;
+    setTimeout(() => {
+      burn1.setVisible(false);
+      background1.setInteractive();
+      bullet1_icon1.setInteractive();
+      bullet2_icon1.setInteractive();
+      bullet3_icon1.setInteractive();
+      bullet4_icon1.setInteractive();
+      teleportation1.setInteractive();
+      wand1.setInteractive();
+      sprite1.clearTint();
+      bullet1_icon1.clearTint();
+      bullet2_icon1.clearTint();
+      bullet3_icon1.clearTint();
+      bullet4_icon1.clearTint();
+      teleportation1.clearTint();
+      wand1.clearTint();
+      burn1.anims.stop("burning");
+    }, 3000);
+  }
+  burn2() {
+    burn2.setVisible(true);
+    sprite2.setVelocity(0, 0);
+    sprite2.tint = 0x919191;
+    burn2.anims.play("burning");
+    background2.disableInteractive();
+    bullet1_icon2.disableInteractive();
+    bullet2_icon2.disableInteractive();
+    bullet3_icon2.disableInteractive();
+    bullet4_icon2.disableInteractive();
+    teleportation2.disableInteractive();
+    wand2.disableInteractive();
+    bullet1_icon2.tint = 0x636363;
+    bullet2_icon2.tint = 0x636363;
+    bullet3_icon2.tint = 0x636363;
+    bullet4_icon2.tint = 0x636363;
+    teleportation2.tint = 0x636363;
+    wand2.tint = 0x636363;
+    setTimeout(() => {
+      burn2.setVisible(false);
+      background2.setInteractive();
+      bullet1_icon2.setInteractive();
+      bullet2_icon2.setInteractive();
+      bullet3_icon2.setInteractive();
+      bullet4_icon2.setInteractive();
+      teleportation2.setInteractive();
+      wand2.setInteractive();
+      sprite2.clearTint();
+      bullet1_icon2.clearTint();
+      bullet2_icon2.clearTint();
+      bullet3_icon2.clearTint();
+      bullet4_icon2.clearTint();
+      teleportation2.clearTint();
+      wand2.clearTint();
+      burn2.anims.stop("burning");
+    }, 3000);
   }
   defend(a, b) {
     a.disableBody(false, true);
@@ -1092,20 +1177,20 @@ class Scene2 extends Phaser.Scene {
       blood_text1.setText("Win");
       blood_text2.setText("Lose");
     }
-    background1.off("tapped");
-    background2.off("tapped");
-    bullet1_icon1.off("selected1_1");
-    bullet2_icon1.off("selected2_1");
-    bullet3_icon1.off("selected3_1");
-    bullet4_icon1.off("selected4_1");
-    bullet1_icon2.off("selected1_2");
-    bullet2_icon2.off("selected2_2");
-    bullet3_icon2.off("selected3_2");
-    bullet4_icon2.off("selected4_2");
-    teleportation1.off("selected_tele1");
-    teleportation2.off("selected_tele2");
-    wand1.off("selected_wand1");
-    wand2.off("selected_wand2");
+    background1.disableInteractive();
+    background2.disableInteractive();
+    bullet1_icon1.disableInteractive();
+    bullet2_icon1.disableInteractive();
+    bullet3_icon1.disableInteractive();
+    bullet4_icon1.disableInteractive();
+    bullet1_icon2.disableInteractive();
+    bullet2_icon2.disableInteractive();
+    bullet3_icon2.disableInteractive();
+    bullet4_icon2.disableInteractive();
+    teleportation1.disableInteractive();
+    teleportation2.disableInteractive();
+    wand1.disableInteractive();
+    wand2.disableInteractive();
     back_icon.setVisible(true);
     retry_icon.setVisible(true);
   }
