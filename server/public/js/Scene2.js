@@ -844,6 +844,7 @@ class Scene2 extends Phaser.Scene {
       teleportation.clearTint();
       teleportation.disableInteractive();
       setTimeout(() => {
+        teleportation.alpha = 1;
         teleportation.setInteractive();
       }, 7000);
     } else {
@@ -1122,7 +1123,7 @@ class Scene2 extends Phaser.Scene {
       bullet4_icon1.clearTint();
       teleportation1.clearTint();
       wand1.clearTint();
-    }, 3000);
+    }, 1700);
   }
   burn2() {
     sprite2.setVelocity(0, 0);
@@ -1157,7 +1158,7 @@ class Scene2 extends Phaser.Scene {
       bullet4_icon2.clearTint();
       teleportation2.clearTint();
       wand2.clearTint();
-    }, 3000);
+    }, 1700);
   }
   defend(a, b) {
     a.disableBody(false, true);
@@ -1171,20 +1172,20 @@ class Scene2 extends Phaser.Scene {
       blood_text1.setText("Win");
       blood_text2.setText("Lose");
     }
-    background1.disableInteractive();
-    background2.disableInteractive();
-    bullet1_icon1.disableInteractive();
-    bullet2_icon1.disableInteractive();
-    bullet3_icon1.disableInteractive();
-    bullet4_icon1.disableInteractive();
-    bullet1_icon2.disableInteractive();
-    bullet2_icon2.disableInteractive();
-    bullet3_icon2.disableInteractive();
-    bullet4_icon2.disableInteractive();
-    teleportation1.disableInteractive();
-    teleportation2.disableInteractive();
-    wand1.disableInteractive();
-    wand2.disableInteractive();
+    background1.off("tapped");
+    background2.off("tapped");
+    bullet1_icon1.off("selected1_1");
+    bullet2_icon1.off("selected2_1");
+    bullet3_icon1.off("selected3_1");
+    bullet4_icon1.off("selected4_1");
+    bullet1_icon2.off("selected1_2");
+    bullet2_icon2.off("selected2_2");
+    bullet3_icon2.off("selected3_2");
+    bullet4_icon2.off("selected4_2");
+    teleportation1.off("selected_tele1");
+    teleportation2.off("selected_tele2");
+    wand1.off("selected_wand1");
+    wand2.off("selected_wand2");
     back_icon.setVisible(true);
     retry_icon.setVisible(true);
   }
