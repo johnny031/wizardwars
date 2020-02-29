@@ -94,7 +94,6 @@ class Scene2 extends Phaser.Scene {
     super("playGame");
   }
   create() {
-    this.scale.lockOrientation("portrait");
     loadBar1_1 = this.add.graphics();
     loadBar2_1 = this.add.graphics();
     loadBar3_1 = this.add.graphics();
