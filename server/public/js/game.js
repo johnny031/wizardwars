@@ -1,5 +1,4 @@
-var heightWidthRatio =
-  screen.height / screen.width > 1 ? screen.height / screen.width : 1.4;
+var heightWidthRatio = screen.height / screen.width;
 var scale = screen.width < 476 ? 275 : 380;
 var width = scale;
 var height = scale * heightWidthRatio;
